@@ -11,8 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 import logging
-from os import getenv
-import logging
+from logging import config
 from os import getenv
 from pathlib import Path
 
@@ -183,32 +182,7 @@ LOGIN_REDIRECT_URL = reverse_lazy("myauth:about-me")
 LOGIN_URL = reverse_lazy("myauth:login")
 
 LOGLEVEL = getenv("DJANGO_LOGLEVEL", "info").upper()
-logging.config.dictConfig(
-    {
-        "version": 1,
-        "disable_existing_loggers": False,
-        "formatters": {
-            "console": {
-                "format": "%(asctime)s %(levelname)s [%(name)s:%(lineno)s] %(module)s %(message)s",
-            },
-        },
-        "handlers": {
-            "console": {
-                "class": "logging.StreamHandler",
-                "formatter": "console",
-            },
-        },
-        "loggers": {
-            "": {
-                "level": LOGLEVEL,
-                "handlers": ["console"],
-            },
-        },
-    },
-)
-
-LOGLEVEL = getenv("DJANGO_LOGLEVEL", "info").upper()
-logging.config.dictConfig(
+config.dictConfig(
     {
         "version": 1,
         "disable_existing_loggers": False,
